@@ -1,0 +1,12 @@
+---
+- name: "Upgrading full distro packages"
+  ansible.builtin.apt:
+    update_cache: true
+    upgrade: "dist"
+
+- name: "Installing required packages"
+  ansible.builtin.import_tasks: "roles/common/tasks/debian/packages/apt.yml"
+  vars:
+    packages:
+      - {name: "gdm3"} # Is a Display Manager.
+      - {name: "ubuntu-desktop-minimal"} # GUI of the Ubuntu with just the necessary applications.
