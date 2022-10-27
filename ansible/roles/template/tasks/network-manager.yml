@@ -1,0 +1,13 @@
+---
+- name: "Copying the netplan config file"
+  ansible.builtin.copy:
+    src: "01-network-manager-all.yaml"
+    dest: "/etc/netplan/"
+    mode: "644"
+  notify:
+    - "Netplan Generate and Apply"
+
+- name: "Removing the old network config file"
+  ansible.builtin.file:
+    path: "/etc/netplan/00-installer-config.yaml"
+    state: "absent"

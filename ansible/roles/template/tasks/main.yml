@@ -2,6 +2,9 @@
 - name: "Installing required packages"
   ansible.builtin.import_tasks: "installing-packages.yml"
 
+- name: "Setting up NetworkManager for the GUI"
+  ansible.builtin.import_tasks: "network-manager.yml"
+
 - name: "Removing unnecessary packages"
   ansible.builtin.import_tasks: "removing-packages.yml"
 

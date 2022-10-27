@@ -1,0 +1,6 @@
+---
+- name: "Netplan Generate and Apply"
+  ansible.builtin.command: "netplan {{ item }}"
+  loop:
+    - "generate"
+    - "apply"
