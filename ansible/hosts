@@ -1,6 +1,9 @@
-[packer]
-template ansible_host=<ip>
+[JumpServer]
+localhost ansible_connection=local
 
-[packer:vars]
+[target]
+ansible_host=<ip>
+
+[target:vars]
 ansible_user=usr_ansible
 ansible_password=<password>
