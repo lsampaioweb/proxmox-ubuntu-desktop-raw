@@ -1,4 +1,7 @@
 ---
+- name: "Changing the hostname"
+  ansible.builtin.import_tasks: "roles/common/tasks/debian/os/hostname.yml"
+
 - name: "Installing required packages"
   ansible.builtin.import_tasks: "installing-packages.yml"
 
@@ -7,9 +10,6 @@
 
 - name: "Removing unnecessary packages"
   ansible.builtin.import_tasks: "removing-packages.yml"
-
-- name: "Changing the hostname"
-  ansible.builtin.import_tasks: "roles/common/tasks/debian/os/hostname.yml"
 
 - name: "Recreating the machine-id file so the new VM can get a new IP"
   ansible.builtin.import_tasks: "roles/common/tasks/debian/os/machine-id.yml"
