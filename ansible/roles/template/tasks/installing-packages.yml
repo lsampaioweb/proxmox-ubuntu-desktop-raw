@@ -13,3 +13,4 @@
       - {name: "network-manager"} # Ubuntu Desktop uses a different network manager.
       - {name: "network-manager-gnome"} # Ubuntu Desktop uses a different network manager.
       - {name: "libnss3-tools"} # To use the certutil tool.
+      - {name: "gnome-keyring"} # The secret manager.
