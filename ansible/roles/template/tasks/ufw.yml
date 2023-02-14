@@ -1,0 +1,6 @@
+---
+- name: "Adding UFW rules"
+  ansible.builtin.import_tasks: "roles/common/tasks/debian/os/ufw.yml"
+  vars:
+    rules:
+      - {rule: "allow", proto: "tcp", to_port: "3389", comment: "Allow remote desktop connections from all internall networks"}
