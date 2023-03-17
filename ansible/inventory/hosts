@@ -12,3 +12,11 @@ kvm-07 ansible_host=192.168.0.17
 
 [proxmox:vars]
 ansible_python_interpreter=/usr/bin/python3.9
+
+; Just for testing.
+; [target]
+; template ansible_host=<ip>
+
+; [target:vars]
+; ansible_user=usr_ansible
+; ansible_password=<password>

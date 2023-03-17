@@ -1,13 +1,10 @@
 ---
-- name: "Copying the netplan config file"
-  ansible.builtin.copy:
-    src: "01-network-manager-all.yaml"
-    dest: "/etc/netplan/"
-    mode: "644"
+- name: "Adding the NetworkManager in the netplan config file"
+  ansible.builtin.lineinfile:
+    path: "/etc/netplan/50-cloud-init.yaml"
+    insertafter: "version: 2"
+    regexp: "renderer: NetworkManager"
+    line: "    renderer: NetworkManager"
+    state: "present"
   notify:
-    - "Netplan Generate and Apply"
-
-- name: "Removing the old network config file"
-  ansible.builtin.file:
-    path: "/etc/netplan/00-installer-config.yaml"
-    state: "absent"
+    - "Netplan Apply"
