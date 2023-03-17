@@ -7,4 +7,4 @@
     line: "    renderer: NetworkManager"
     state: "present"
   notify:
-    - "Netplan Apply"
+    - "Netplan Generate"
