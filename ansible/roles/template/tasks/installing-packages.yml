@@ -8,6 +8,5 @@
       - {name: "gdm3"} # Is a Display Manager.
       - {name: "ubuntu-desktop-minimal"} # GUI of the Ubuntu with just the necessary applications.
       - {name: "libnss3-tools"} # To use the certutil tool.
-      - {name: "gnome-keyring"} # The secret manager.
       - {name: "network-manager"} # Ubuntu Desktop uses a different network manager.
       - {name: "network-manager-gnome"} # Ubuntu Desktop uses a different network manager.
