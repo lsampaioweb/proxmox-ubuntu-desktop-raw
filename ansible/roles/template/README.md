@@ -8,12 +8,14 @@
 
 ## 3. Settup up NetworkManager for the GUI.
 
-## 4. Remove unnecessary files, folders and configuration.
+## 4. Remove unnecessary packages.
 
 ## 5. Enable UFW.
 
 ## 6. Recreate the machine-id file so the new VM can get a new IP.
 
-# Created by: 
+## 7. Remove unnecessary files, folders and configuration.
+
+# Created by:
 
 1. Luciano Sampaio.
