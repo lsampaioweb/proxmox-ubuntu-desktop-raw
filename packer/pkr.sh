@@ -31,8 +31,8 @@ if [ "$4" = "debug" ]; then
   debug=1
 fi
 
-PACKER_LOG=$debug packer $action $errorAction -only="credencials.null.password" -var-file=$environment/vars.pkrvars.hcl clone/.
+PACKER_LOG=$debug packer $action $errorAction -only="credencials.null.password" -var-file=env/$environment/vars.pkrvars.hcl clone/.
 
-PACKER_LOG=$debug packer $action $errorAction -only="ubuntu.proxmox-clone.template" -var-file=$environment/vars.pkrvars.hcl clone/.
+PACKER_LOG=$debug packer $action $errorAction -only="ubuntu.proxmox-clone.template" -var-file=env/$environment/vars.pkrvars.hcl clone/.
 
-PACKER_LOG=$debug packer $action $errorAction -only="kvm-node.null.extra-config" -var-file=$environment/vars.pkrvars.hcl clone/.
+PACKER_LOG=$debug packer $action $errorAction -only="kvm-node.null.extra-config" -var-file=env/$environment/vars.pkrvars.hcl clone/.
