@@ -1,19 +1,20 @@
 # Setup the machine with the default applications and settings
 
-# Tasks:
+### Tasks:
 
-## 1. Change the hostname of the server.
+### 1. Change the hostname of the server.
 
-## 2. Install required packages.
+### 2. Install required packages.
 
-## 3. Setup up NetworkManager for the GUI.
+### 3. Setup up NetworkManager for the GUI.
 
-## 4. Remove unnecessary packages.
+### 4. Remove unnecessary packages.
 
-## 5. Recreate the machine-id file so the new VM can get a new IP.
+### 5. Recreate the machine-id file so the new VM can get a new IP.
 
-## 6. Remove unnecessary files, folders and configuration.
+### 6. Remove unnecessary files, folders and configuration.
 
-# Created by:
+#
+### Created by:
 
 1. Luciano Sampaio.
