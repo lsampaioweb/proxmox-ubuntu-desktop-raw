@@ -8,3 +8,8 @@
     state: "present"
   notify:
     - "Netplan Generate"
+
+- name: "Stopping systemd-networkd service"
+  ansible.builtin.systemd:
+    name: "systemd-networkd"
+    enabled: false
