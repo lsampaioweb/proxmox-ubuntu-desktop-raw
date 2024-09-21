@@ -2,14 +2,14 @@
 - name: "Adding the NetworkManager in the netplan config file"
   ansible.builtin.lineinfile:
     path: "/etc/netplan/50-cloud-init.yaml"
-    insertafter: "version: 2"
-    regexp: "renderer: NetworkManager"
+    insertafter: "^    version: 2"
+    regexp: "^    renderer: NetworkManager"
     line: "    renderer: NetworkManager"
     state: "present"
   notify:
-    - "Netplan Generate"
+    - "Netplan Apply"
 
-- name: "Stopping systemd-networkd service"
+- name: "Disabling systemd-networkd service"
   ansible.builtin.systemd:
     name: "systemd-networkd"
     enabled: false
