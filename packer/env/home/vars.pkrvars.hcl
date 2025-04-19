@@ -2,10 +2,10 @@
 proxmox_url = "https://edge-pve-01.lan.homelab:8006/api2/json"
 
 # Clone
-clone_vm             = "ubuntu-24-04-server-raw"
+clone_vm = "ubuntu-24-04-server-raw"
 
 # General
-node                 = "edge-pve-02"
+node                 = "edge-pve-01"
 vm_id                = 921
 vm_name              = "ubuntu-24-04-desktop-raw"
 pool                 = "Template"
@@ -16,6 +16,6 @@ cloud_init_storage_pool = "Ceph_Gold"
 
 # OS
 vga = {
-  type   = "std",
+  type   = "virtio-gl",
   memory = 128
 }
