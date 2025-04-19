@@ -16,6 +16,6 @@ cloud_init_storage_pool = "Ceph_Gold"
 
 # OS
 vga = {
-  type   = "std",
+  type   = "virtio-gl",
   memory = 128
 }
