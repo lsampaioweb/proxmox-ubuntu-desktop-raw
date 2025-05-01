@@ -1,4 +1,4 @@
-# proxmox-ubuntu-24-04-desktop-raw
+# proxmox-ubuntu-desktop-raw
 Project with Ansible scripts to create an Ubuntu Desktop template on Proxmox from a cloned virtual machine with the minimum packages and updates.
 
 Run the command in the terminal:

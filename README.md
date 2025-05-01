@@ -1,4 +1,4 @@
-# proxmox-ubuntu-22-04-desktop-raw
+# proxmox-ubuntu-desktop-raw
 Project with Packer and Ansible scripts to create an Ubuntu Desktop template on Proxmox from a cloned virtual machine with the bare minimum packages and updates.
 
 #
