@@ -2,7 +2,7 @@
 - name: "Adding the NetworkManager in the netplan config file"
   ansible.builtin.lineinfile:
     path: "/etc/netplan/50-cloud-init.yaml"
-    insertafter: "^    version: 2"
+    insertafter: "^network:"
     regexp: "^    renderer: NetworkManager"
     line: "    renderer: NetworkManager"
     state: "present"

@@ -1,13 +1,16 @@
 ---
-- name: "Installing required packages"
-  ansible.builtin.import_tasks: "roles/common/tasks/debian/packages/apt.yml"
+- name: "Including OS-specific or default variables for global packages"
+  ansible.builtin.include_vars:
+    file: "{{ item }}"
+  with_first_found:
+    - "{{ ansible_lsb.codename }}.yml"
+    - "packages.yml"
+
+- name: "Installing global APT packages"
+  ansible.builtin.import_role:
+    name: "common"
+    tasks_from: "debian/packages/apt"
   vars:
     update_cache: true
-    upgrade: "safe"
-    packages:
-      - {name: "gdm3"} # It is a Display Manager.
-      - {name: "ubuntu-desktop-minimal"} # GUI of Ubuntu with just the necessary applications.
-      - {name: "libnss3-tools"} # To use the certutil tool.
-      - {name: "gnome-keyring"} # The secret manager.
-      - {name: "network-manager"} # Ubuntu Desktop uses a different network manager.
-      - {name: "network-manager-gnome"} # Ubuntu Desktop uses a different network manager.
+    upgrade: true
+    packages: "{{ apt_packages }}"

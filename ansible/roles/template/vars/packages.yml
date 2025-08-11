@@ -1,0 +1,8 @@
+---
+apt_packages:
+  - {name: "gdm3"} # It is a Display Manager.
+  - {name: "ubuntu-desktop-minimal"} # GUI of Ubuntu with just the necessary applications.
+  - {name: "libnss3-tools"} # To use the certutil tool.
+  - {name: "gnome-keyring"} # The secret manager.
+  - {name: "network-manager"} # Ubuntu Desktop uses a different network manager.
+  - {name: "network-manager-gnome"} # Ubuntu Desktop uses a different network manager.
