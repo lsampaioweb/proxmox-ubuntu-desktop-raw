@@ -1,8 +1,11 @@
 ---
 apt_packages:
-  - {name: "gdm3"} # It is a Display Manager.
-  - {name: "ubuntu-desktop-minimal"} # GUI of Ubuntu with just the necessary applications.
-  - {name: "libnss3-tools"} # To use the certutil tool.
-  - {name: "gnome-keyring"} # The secret manager.
-  - {name: "network-manager"} # Ubuntu Desktop uses a different network manager.
-  - {name: "network-manager-gnome"} # Ubuntu Desktop uses a different network manager.
+  # Desktop Environment - Core GUI components and session management.
+  - {name: "gdm3"} # GNOME Display Manager for user login and session management.
+  - {name: "ubuntu-desktop-minimal"} # Minimal Ubuntu desktop with essential applications.
+  # Security & Credentials - Desktop authentication and secret management.
+  - {name: "libnss3-tools"} # Certificate management utilities (certutil, etc.).
+  - {name: "gnome-keyring"} # Secret manager for GUI credential storage.
+  # Network Management - Desktop-optimized network configuration.
+  - {name: "network-manager"} # Desktop network configuration service.
+  - {name: "network-manager-gnome"} # GNOME network management GUI integration.
