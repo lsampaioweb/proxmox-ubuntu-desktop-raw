@@ -3,8 +3,10 @@ apt_packages:
   # Desktop Environment - Core GUI components and session management.
   - {name: "gdm3"} # GNOME Display Manager for user login and session management.
   - {name: "ubuntu-desktop-minimal"} # Minimal Ubuntu desktop with essential applications.
+  # Desktop Core Infrastructure - Essential desktop services.
+  - {name: "dbus-x11"} # D-Bus support for X applications; required by community.general.dconf.
+  - {name: "gnupg2"} # Encryption and signing using GPG (desktop security fundamental).
   # Security & Credentials - Desktop authentication and secret management.
-  - {name: "libnss3-tools"} # Certificate management utilities (certutil, etc.).
   - {name: "gnome-keyring"} # Secret manager for GUI credential storage.
   # Network Management - Desktop-optimized network configuration.
   - {name: "network-manager"} # Desktop network configuration service.
