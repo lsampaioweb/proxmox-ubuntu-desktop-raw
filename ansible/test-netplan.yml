@@ -1,0 +1,78 @@
+---
+- name: "Test netplan configuration - Ubuntu Server simulation"
+  hosts: localhost
+  connection: local
+  become: true
+
+  tasks:
+    - name: "Create Ubuntu Server style netplan file (systemd-networkd)"
+      ansible.builtin.copy:
+        content: |
+          # This file is generated from information provided by the datasource.  Changes
+          # to it will not persist across an instance reboot.  To disable cloud-init's
+          # network configuration capabilities, write a file
+          # /etc/cloud/cloud.cfg.d/99-disable-network-config.cfg with the following:
+          # network: {config: disabled}
+          network:
+            version: 2
+            ethernets:
+              eth0:
+                dhcp4: true
+                match:
+                  macaddress: 6e:4c:7c:0b:7d:79
+                set-name: eth0
+        dest: "/tmp/server-netplan.yaml"
+
+    - name: "Show original server netplan"
+      ansible.builtin.command: cat /tmp/server-netplan.yaml
+      register: original
+
+    - name: "Display original content"
+      ansible.builtin.debug:
+        msg: "=== ORIGINAL SERVER NETPLAN ==="
+
+    - name: "Display original lines"
+      ansible.builtin.debug:
+        var: original.stdout_lines
+
+    - name: "Test NetworkManager check task"
+      ansible.builtin.lineinfile:
+        path: "/tmp/server-netplan.yaml"
+        regexp: "^\\s+renderer:\\s+NetworkManager"
+        state: "absent"
+      check_mode: true
+      register: nm_check
+
+    - name: "Show check result"
+      ansible.builtin.debug:
+        msg: "NetworkManager check changed: {{ nm_check.changed }} (should be True for server)"
+
+    - name: "Test the NetworkManager insertion task"
+      ansible.builtin.lineinfile:
+        path: "/tmp/server-netplan.yaml"
+        insertbefore: "^\\s+version:"
+        regexp: "^\\s+renderer:"
+        line: "    renderer: NetworkManager"
+        state: "present"
+      when: nm_check.changed
+
+    - name: "Show result after modification"
+      ansible.builtin.command: cat /tmp/server-netplan.yaml
+      register: result
+
+    - name: "Display modified content"
+      ansible.builtin.debug:
+        msg: "=== AFTER NETWORKMANAGER INSERTION ==="
+
+    - name: "Display modified lines"
+      ansible.builtin.debug:
+        var: result.stdout_lines
+
+    - name: "Test YAML validity with Python"
+      ansible.builtin.shell: cat /tmp/server-netplan.yaml | python3 -c "import sys; import yaml; print('YAML is valid'); yaml.safe_load(sys.stdin)"
+      register: yaml_test
+      ignore_errors: true
+
+    - name: "Show YAML validation result"
+      ansible.builtin.debug:
+        var: yaml_test

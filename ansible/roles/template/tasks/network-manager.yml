@@ -1,11 +1,19 @@
 ---
+- name: "Check if renderer line exists in netplan"
+  ansible.builtin.lineinfile:
+    path: "/etc/netplan/50-cloud-init.yaml"
+    regexp: "^\\s+renderer:"
+    state: "absent"
+  check_mode: true
+  register: renderer_check
+
 - name: "Adding the NetworkManager in the netplan config file"
   ansible.builtin.lineinfile:
     path: "/etc/netplan/50-cloud-init.yaml"
     insertafter: "^network:"
-    regexp: "^    renderer: NetworkManager"
-    line: "    renderer: NetworkManager"
+    line: "  renderer: NetworkManager"
     state: "present"
+  when: not renderer_check.changed
   notify:
     - "Netplan Apply"
 
