@@ -1,0 +1,12 @@
+---
+# This playbook orchestrates all top-level playbooks in sequence.
+# Individual playbooks can still be run independently.
+
+- name: "Orchestrating Ansible playbooks"
+  ansible.builtin.import_playbook: "localhost.yml"
+
+- name: "Orchestrating template playbook"
+  ansible.builtin.import_playbook: "template.yml"
+
+- name: "Orchestrating KVM setup playbook"
+  ansible.builtin.import_playbook: "kvm_setup.yml"
