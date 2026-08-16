@@ -22,6 +22,7 @@
                   macaddress: 6e:4c:7c:0b:7d:79
                 set-name: eth0
         dest: "/tmp/server-netplan.yaml"
+        mode: "0644"
 
     - name: "Showing original server netplan"
       ansible.builtin.command: cat /tmp/server-netplan.yaml
@@ -42,7 +43,7 @@
         regexp: "^\\s+renderer:\\s+NetworkManager"
         state: "absent"
       check_mode: true
-      register: nm_check
+      register: "nm_check"
 
     - name: "Showing check result"
       ansible.builtin.debug:
@@ -78,7 +79,7 @@
         executable: "/usr/bin/bash"
       changed_when: false
       ignore_errors: true
-      register: yaml_test
+      register: "yaml_test"
 
     - name: "Showing YAML validation result"
       ansible.builtin.debug:
