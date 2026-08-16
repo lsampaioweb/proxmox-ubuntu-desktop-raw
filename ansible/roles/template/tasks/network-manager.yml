@@ -8,12 +8,12 @@
   register: renderer_check
 
 - name: "Adding the NetworkManager in the netplan config file"
+  when: not renderer_check.changed
   ansible.builtin.lineinfile:
     path: "/etc/netplan/50-cloud-init.yaml"
     insertafter: "^network:"
     line: "  renderer: NetworkManager"
     state: "present"
-  when: not renderer_check.changed
   notify:
     - "Netplan Apply"
 
