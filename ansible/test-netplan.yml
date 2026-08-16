@@ -1,11 +1,11 @@
 ---
-- name: "Test netplan configuration - Ubuntu Server simulation"
+- name: "Testing netplan configuration - Ubuntu Server simulation"
   hosts: localhost
   connection: local
   become: true
 
   tasks:
-    - name: "Create Ubuntu Server style netplan file (systemd-networkd)"
+    - name: "Creating Ubuntu Server style netplan file (systemd-networkd)"
       ansible.builtin.copy:
         content: |
           # This file is generated from information provided by the datasource.  Changes
@@ -23,19 +23,20 @@
                 set-name: eth0
         dest: "/tmp/server-netplan.yaml"
 
-    - name: "Show original server netplan"
+    - name: "Showing original server netplan"
       ansible.builtin.command: cat /tmp/server-netplan.yaml
+      changed_when: false
       register: original
 
-    - name: "Display original content"
+    - name: "Displaying original content"
       ansible.builtin.debug:
         msg: "=== ORIGINAL SERVER NETPLAN ==="
 
-    - name: "Display original lines"
+    - name: "Displaying original lines"
       ansible.builtin.debug:
         var: original.stdout_lines
 
-    - name: "Test NetworkManager check task"
+    - name: "Testing NetworkManager check task"
       ansible.builtin.lineinfile:
         path: "/tmp/server-netplan.yaml"
         regexp: "^\\s+renderer:\\s+NetworkManager"
@@ -43,36 +44,42 @@
       check_mode: true
       register: nm_check
 
-    - name: "Show check result"
+    - name: "Showing check result"
       ansible.builtin.debug:
         msg: "NetworkManager check changed: {{ nm_check.changed }} (should be True for server)"
 
-    - name: "Test the NetworkManager insertion task"
+    - name: "Testing the NetworkManager insertion task"
+      when: nm_check.changed
       ansible.builtin.lineinfile:
         path: "/tmp/server-netplan.yaml"
         insertbefore: "^\\s+version:"
         regexp: "^\\s+renderer:"
         line: "    renderer: NetworkManager"
         state: "present"
-      when: nm_check.changed
 
-    - name: "Show result after modification"
+    - name: "Showing result after modification"
       ansible.builtin.command: cat /tmp/server-netplan.yaml
+      changed_when: false
       register: result
 
-    - name: "Display modified content"
+    - name: "Displaying modified content"
       ansible.builtin.debug:
         msg: "=== AFTER NETWORKMANAGER INSERTION ==="
 
-    - name: "Display modified lines"
+    - name: "Displaying modified lines"
       ansible.builtin.debug:
         var: result.stdout_lines
 
-    - name: "Test YAML validity with Python"
-      ansible.builtin.shell: cat /tmp/server-netplan.yaml | python3 -c "import sys; import yaml; print('YAML is valid'); yaml.safe_load(sys.stdin)"
-      register: yaml_test
+    - name: "Testing YAML validity with Python"
+      ansible.builtin.shell: >-
+        set -o pipefail && \
+        cat /tmp/server-netplan.yaml | python3 -c "import sys; import yaml; print('YAML is valid'); yaml.safe_load(sys.stdin)"
+      args:
+        executable: "/usr/bin/bash"
+      changed_when: false
       ignore_errors: true
+      register: yaml_test
 
-    - name: "Show YAML validation result"
+    - name: "Showing YAML validation result"
       ansible.builtin.debug:
         var: yaml_test

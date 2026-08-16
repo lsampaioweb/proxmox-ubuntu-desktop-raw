@@ -1,5 +1,5 @@
 ---
-- name: "Check if renderer line exists in netplan"
+- name: "Checking if renderer line exists in netplan"
   ansible.builtin.lineinfile:
     path: "/etc/netplan/50-cloud-init.yaml"
     regexp: "^\\s+renderer:"
